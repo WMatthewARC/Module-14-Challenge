@@ -57,7 +57,7 @@ The dataset reveals that a small handful of microbial species (also called opera
         createMetadata(metadata);
         createGauge(metadata);
     }
-## Horizontal bar chart 
+### Horizontal bar chart 
     function createBarGraph(sample) {
               var layout = {
                   autosize: false,
@@ -118,7 +118,7 @@ The dataset reveals that a small handful of microbial species (also called opera
       };
       
       Plotly.newPlot('bubble', data, layout);
-}
+      }
 
 
 
