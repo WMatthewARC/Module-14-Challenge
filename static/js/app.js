@@ -46,7 +46,7 @@ function createMetadata(metadata) {
     // for(var i=0; i<arr.length; i++) {
     //     div.append('p').text(`${arr[i][0]}: ${arr[i][1]}`);
     // }
-    
+
     div.append('p').text(`id: ${metadata.id}`);
     div.append('p').text(`ethnicity: ${metadata.ethnicity}`);
     div.append('p').text(`gender: ${metadata.gender}`);
@@ -60,7 +60,7 @@ function displaySample(sample, metadata) {
     createBarGraph(sample);
     createBubbleChart(sample);
     createMetadata(metadata);
-    //createGauge(sample);
+    createGauge(metadata);
 }
 
 function createBarGraph(sample) {
@@ -125,4 +125,70 @@ function createBubbleChart(sample) {
       };
       
       Plotly.newPlot('bubble', data, layout);
+}
+
+function createGauge(metadata) {
+    var data = [
+        {
+          domain: { x: [0, 1], y: [0, 1] },
+          value: metadata.wfreq,
+          title: { text: "Belly Jelly Weekly Clean" },
+          type: "indicator",
+          mode: "gauge+number",
+          //delta: { reference: 380 },
+          gauge: {
+            borderwidth: 0,
+            axis: {
+                range: [0, 9],
+                ticks: "",
+                //ticklen: 10,
+                tickmode: 'array',
+                tickvals: [.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5],
+                ticktext: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
+                
+            },
+            steps: [
+              { name: '0-1', range: [0, 1], color: "#F7DC6F" },
+              { range: [1, 2], color: "#82E0AA" },
+              { range: [2, 3], color: "#7DCEA0" },
+              { range: [3, 4], color: "#73C6B6" },
+              { range: [4, 5], color: "#76D7C4" },
+
+              { range: [5, 6], color: "#85C1E9" },
+              { range: [6, 7], color: "#7FB3D5" },
+              { range: [7, 8], color: "#BB8FCE" },
+              { range: [8, 9], color: "#C39BD3" },
+            ],
+            // threshold: {
+            //   line: { color: "red", width: 4 },
+            //   thickness: 0.75,
+            //   value: 490
+            // }
+          }
+        }
+      ];
+    var theta = 93.5
+    var r = 0.7
+    var x_head = r * Math.cos(Math.PI/180*theta)
+    var y_head = r * Math.sin(Math.PI/180*theta)
+
+    var layout = {
+        width: 600,
+        height: 450,
+        margin: { t: 0, b: 0 },
+        annotation: {
+            ax: 0.5,
+            ay: 0,
+            axref: 'x',
+            ayref: 'y',
+            x: 0.5+x_head,
+            y: y_head,
+            xref: 'x',
+            yref: 'y',
+            showarrow: true,
+            arrowhead: 9,
+        }
+    };
+    
+    Plotly.newPlot('gauge', data, layout);
 }
