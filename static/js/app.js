@@ -136,7 +136,7 @@ function createGauge(metadata) {
         {
           domain: { x: [0, 1], y: [0, 1] },
           value: metadata.wfreq,
-          title: { text: "Belly Jelly Weekly Clean" },
+          title: { text: "Belly Jelly Weekly Cleaning" },
           type: "indicator",
           mode: "gauge+number",
           //delta: { reference: 380 },
